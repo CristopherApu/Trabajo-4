@@ -1,0 +1,70 @@
+// -------------- Batería ----------------------
+
+	int sensorValue = 0;
+	float volt = 0;
+
+// ------------ Tempereatura -------------------
+
+	int sensorRead = 0;
+	float temp = 0.0;
+
+void setup(){
+  pinMode(A1, INPUT);
+  Serial.begin(9600);
+}
+
+void loop(){
+  
+  // -------------- Batería ----------------------
+
+  Serial.print("--- Bienvenido usuario, el estado de carga de su bateria es de un ");
+  sensorValue = analogRead(A1);
+  volt = sensorValue / 68.16;
+  
+  if (volt >= 12.6){
+  	Serial.print("100");
+  }
+  if ((volt >= 12.4) && (volt < 12.6)){
+    	Serial.print("75");
+  }
+  if ((volt >= 12.1) && (volt < 12.4)){
+    	Serial.print("50");
+  }
+  if ((volt >= 11.9) && (volt < 12.1)){
+    	Serial.print("25");
+  }
+  if (volt < 11.9){
+    	Serial.print("0");
+  }
+  
+  Serial.println(" %");
+  
+// ------------ Temperatura -------------------
+  
+  Serial.print("y la temperatura a la que esta se ve expuesta es de ");
+  sensorRead = analogRead(3);
+  temp = ( sensorRead * (500.0 / 1023.0) ) - 50.0;
+  Serial.print(temp);
+  Serial.println(" Grados Celsius ---");
+  
+// ------------------ Alertas ------------------
+  
+  
+  if( temp > 30) {
+    Serial.println("--------------------------- ALERTA --------------------------");
+    Serial.println("------------------ La temperatura esta muy alta. ------------");
+  }
+  if( temp < 3) {
+    Serial.println("--------------------------- ALERTA --------------------------");
+    Serial.println("------------------ La temperatura esta muy baja. ------------");
+  }
+  
+  if (volt < 3.3){
+    Serial.println("--------------------------- ALERTA --------------------------");
+    Serial.print("--------------------- El voltaje es muy bajo. ---------------");
+  }
+  
+  delay(3000);
+  Serial.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+  
+}
