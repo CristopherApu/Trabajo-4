@@ -1,0 +1,23 @@
+//Creamos una variable de tipo entero y una de tipo flotante
+int sensorRead = 0;
+float temp = 0.0;
+
+void setup() {
+  //Iniciamos la comunicación serial
+  Serial.begin(9600);
+}
+
+void loop() {
+  /*Tomamos la lectura analógica del pin al cual conectamos
+  la señal de nuestro sensor*/
+  
+  sensorRead = analogRead(1);
+
+  //Obtenemos la temperatura con la siguiente formula:
+  temp = ( sensorRead * (500.0 / 1023.0) ) - 50.0;
+  
+  //Imprimimos por monitor serie la temperatura en celcius 
+  Serial.println(temp);
+  delay(600);
+  
+}
