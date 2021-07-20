@@ -1,0 +1,21 @@
+  // Definimos la variable de ingreso
+	int sensorValue = 0;
+void setup(){
+  //Definimos la comunicación serial y el tipo de entrada
+  
+  pinMode(A1, INPUT);
+  Serial.begin(9600);
+
+}
+
+void loop()
+{
+  // Leemos los datos del sensor
+  sensorValue = analogRead(A1);
+  /* Trabajamos los datos recibidos, para entregar por pantalla
+  lo que necesitamos saber*/
+  Serial.print(sensorValue/68.16);
+  Serial.println(" Voltios");
+  delay(100); /* Establecemos un tiempo de retardo
+  para que se refresque el lopp*/
+}
